@@ -5,7 +5,7 @@ const PORT = process.env["PORT"] ? parseInt(process.env["PORT"]) : 3001;
 
 // Metabase configuration from your instructions
 const METABASE_SITE_URL = "https://charcoal-ferry.metabaseapp.com";
-const METABASE_SECRET_KEY = "758281b95fddfa1ac3667eb973291c16eb9000136022d405c8dc82351324db7e";
+const METABASE_SECRET_KEY = "59ee07028a7abef1cb15ed87494f73a927dd6a242770eaaf1cd0070532b676f5";
 
 const app = express();
 
