@@ -17,7 +17,7 @@ app.get("/", (req, res) => {
   const URL = METABASE_SITE_URL;
   const key = METABASE_SECRET_KEY;
   const payload = {
-    resource: { question: 1 }
+    resource: { dashboard: 10 }
   };
   
   // Sign the JWT token using jsrsasign
