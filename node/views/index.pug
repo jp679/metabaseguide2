@@ -3,35 +3,21 @@ extends layout.pug
 block content
     div
         article
-            h1 Embedding Metabase in a Node app
-            p By embedding Metabase, you can use Metabase charts and Dashboards within your application. You can embed the entire Metabase application in your app (see our <a href='https://www.metabase.com/embedding-demo'> full-app embedding demo</a>). You can also embed standalone questions and dashboards in one of two ways, depending on the degree of security you need in your application:
-            nav
-                a(href="#public") Public embedding
-                a(href="#signed") Signed embedding
+            h1 Simple Metabase Dashboard Embed
+            p This is a simple example of a static Metabase dashboard embedded in a web application.
+            
+            p The dashboard below is embedded using a signed JWT token that provides secure access to the specific dashboard without requiring user authentication.
 
             hr
 
-            section(id="public")
-                h2 Public Embeds
-                p You can use the public link URLs inside of an iframe. In this case, the same public dashboard you see via a <a href="http://localhost:3000/public/dashboard/e104be98-2ea1-4dce-abff-aa3cfeddfe40">Public Dashboard</a> link, is embedded directly in your application, blog, or really anywhere that you can insert HTML. The iframe has a secure URL in that a user can only look at the contents of the dashboard being shared. An end user never has information they can use to modify the url and gain access to any other resources on your Metabase instance. That same dashboard can be seen embedded in this page below.
+            section
+                h2 Embedded Dashboard
+                p Below is the embedded Metabase dashboard:
 
-                iframe(src="http://localhost:3000/public/dashboard/e104be98-2ea1-4dce-abff-aa3cfeddfe40" frameborder="0" width="800" height="600" allowtransparency)
-
-                p Similarly, we can embed a <a href="http://localhost:3000/public/question/938a446c-da62-479a-a1bd-913cd29a77ef">single question's chart</a> in our application as below. 
-
-                iframe(src="http://localhost:3000/public/question/938a446c-da62-479a-a1bd-913cd29a77ef" frameborder="0"               width="800" height="600" allowtransparency)
-
-            section(id="signed")
-                h2 Signed Embedding
-
-                p With signed embedding, all embedded charts and dashboards have to be signed using a secret key. This should be done on your server, and allows you to embed dashboards filtered down to a specific user, organization or account. For example, we can take the same dashboard above and embed it. Additionally, it is easy to provide a per-user dashboard like you will see if you follow this link and log in with user: "admin" and password "admin"
-
-                a(href="/signed_dashboard/2") An example of a specific User's dashboard
-
-                p If you want to just embed a single chart, you can do that too. See the below example, which embeds chart #1, limited to user #1.
-
-                a(href="/signed_chart/2") An example of a specific User's chart
-
-                p We can also embed signed dashboards that are not limited to a single user. The below is a dashboard that can only be displayed if the embedding application signs the url with our secret key and can only be used in that application. 
-
-                a(href="/signed_public_dashboard") An example of a signed dashboard without signed parameters
+                iframe(
+                    src=iframeUrl
+                    frameborder="0"
+                    width="800"
+                    height="600"
+                    allowtransparency
+                )
