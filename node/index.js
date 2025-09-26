@@ -24,7 +24,8 @@ app.get("/", (req, res) => {
   const token = jwt.sign("HS256", JSON.stringify({alg: "HS256", typ: "JWT"}), JSON.stringify(payload), key);
   
   // Construct the iframe URL
-  const iframeUrl = URL + "/embed/question/" + token + "#bordered=true&titled=true";
+  const iframeUrl = URL + "/embed/dashboard
+  /" + token + "#bordered=true&titled=true";
   
   // Render the index template with the iframe URL
   res.render("index", { iframeUrl: iframeUrl });
