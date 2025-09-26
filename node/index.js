@@ -1,5 +1,5 @@
 const express = require("express");
-const jwt = require("jsonwebtoken");
+const jsrsasign = require("jsrsasign");
 
 const PORT = process.env["PORT"] ? parseInt(process.env["PORT"]) : 3001;
 
@@ -12,18 +12,19 @@ const app = express();
 app.set("view engine", "pug");
 
 app.get("/", (req, res) => {
-  // Create the payload for the static dashboard embed
+  // Create the payload for the static question embed using jsrsasign
+  const jwt = jsrsasign.jws.JWS;
+  const URL = METABASE_SITE_URL;
+  const key = METABASE_SECRET_KEY;
   const payload = {
-    resource: { dashboard: 1 },
-    params: {},
-    exp: Math.round(Date.now() / 1000) + (10 * 60) // 10 minute expiration
+    resource: { question: 302 }
   };
   
-  // Sign the JWT token with the secret key
-  const token = jwt.sign(payload, METABASE_SECRET_KEY);
+  // Sign the JWT token using jsrsasign
+  const token = jwt.sign("HS256", JSON.stringify({alg: "HS256", typ: "JWT"}), JSON.stringify(payload), key);
   
   // Construct the iframe URL
-  const iframeUrl = METABASE_SITE_URL + "/embed/dashboard/" + token + "#bordered=true&titled=true";
+  const iframeUrl = URL + "/embed/question/" + token + "#bordered=true&titled=true";
   
   // Render the index template with the iframe URL
   res.render("index", { iframeUrl: iframeUrl });
