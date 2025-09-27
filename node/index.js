@@ -12,7 +12,12 @@ const app = express();
 
 // Configure Helmet with appropriate referrer policy for embedding
 app.use(helmet({
-  referrerPolicy: { policy: "strict-origin-when-cross-origin" }
+  referrerPolicy: { policy: "strict-origin-when-cross-origin" },
+  contentSecurityPolicy: {
+    directives: {
+      scriptSrc: ["'self'", "'unsafe-eval'"]
+    }
+  }
 }));
 
 app.set("view engine", "pug");
